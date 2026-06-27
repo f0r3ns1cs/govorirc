@@ -1,0 +1,215 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+
+    {
+      "name": "linux-x64",
+      "displayName": "Linux x64",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": { "VCPKG_TARGET_TRIPLET": "x64-linux" },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+
+    {
+      "name": "mac",
+      "displayName": "macOS arm64",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "arm64-osx",
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "mac-intel",
+      "displayName": "macOS x86_64",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-osx",
+        "CMAKE_OSX_ARCHITECTURES": "x86_64"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "mac-fat",
+      "displayName": "macOS universal",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "arm64-osx",
+        "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+
+    {
+      "name": "win-x64",
+      "displayName": "Windows x64",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "win-x86",
+      "displayName": "Windows x86",
+      "inherits": "base",
+      "generator": "Ninja Multi-Config",
+      "architecture": {
+        "value": "x86",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x86-windows",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    }
+  ],
+
+  "buildPresets": [
+    {
+      "name": "linux-x64-debug",
+      "displayName": "Debug",
+      "configurePreset": "linux-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "linux-x64-relwithdebinfo",
+      "displayName": "RelWithDebInfo",
+      "configurePreset": "linux-x64",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "linux-x64-release",
+      "displayName": "Release",
+      "configurePreset": "linux-x64",
+      "configuration": "Release"
+    },
+
+    {
+      "name": "mac-debug",
+      "displayName": "Debug",
+      "configurePreset": "mac",
+      "configuration": "Debug"
+    },
+    {
+      "name": "mac-relwithdebinfo",
+      "displayName": "RelWithDebInfo",
+      "configurePreset": "mac",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "mac-release",
+      "displayName": "Release",
+      "configurePreset": "mac",
+      "configuration": "Release"
+    },
+
+    {
+      "name": "mac-intel-debug",
+      "displayName": "Debug",
+      "configurePreset": "mac-intel",
+      "configuration": "Debug"
+    },
+    {
+      "name": "mac-intel-release",
+      "displayName": "Release",
+      "configurePreset": "mac-intel",
+      "configuration": "Release"
+    },
+
+    {
+      "name": "mac-fat-release",
+      "displayName": "Release",
+      "configurePreset": "mac-fat",
+      "configuration": "Release"
+    },
+
+    {
+      "name": "win-x64-debug",
+      "displayName": "Debug",
+      "configurePreset": "win-x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "win-x64-relwithdebinfo",
+      "displayName": "RelWithDebInfo",
+      "configurePreset": "win-x64",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "win-x64-release",
+      "displayName": "Release",
+      "configurePreset": "win-x64",
+      "configuration": "Release"
+    },
+
+    {
+      "name": "win-x86-debug",
+      "displayName": "Debug",
+      "configurePreset": "win-x86",
+      "configuration": "Debug"
+    },
+    {
+      "name": "win-x86-release",
+      "displayName": "Release",
+      "configurePreset": "win-x86",
+      "configuration": "Release"
+    }
+  ]
+}

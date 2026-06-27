@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "govorirc",
+  "version": "0.1.0",
+  "description": "govorirc IRC server and client",
+  "dependencies": [
+    "openssl",
+    {
+      "name": "ncurses",
+      "platform": "!windows"
+    },
+    {
+      "name": "pdcurses",
+      "platform": "windows"
+    }
+  ],
+  "builtin-baseline": "89dd0f4d241136b843fb55813b2f0fa6448c204d"
+}
