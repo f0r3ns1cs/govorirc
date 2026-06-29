@@ -1,4 +1,12 @@
-certs/*.pem
+/certs/
+
+*.pem
+*.key
+*.crt
+*.csr
+*.pfx
+*.p12
+*.der
 
 build/
 Build/
@@ -17,42 +25,34 @@ CMakeUserPresets.json
 _deps/
 Testing/
 
-# Prerequisites
 *.d
 
-# Compiled object files
 *.slo
 *.lo
 *.o
 *.obj
 
-# Precompiled headers
 *.gch
 *.pch
 
-# Linker / debugger files
 *.ilk
 *.pdb
 *.dwo
 
-# Compiled dynamic libraries
 *.so
 *.so.*
 *.dylib
 *.dll
 
-# Compiled static libraries
 *.lai
 *.la
 *.a
 *.lib
 
-# Executables
 *.exe
 *.out
 *.app
 
-# vcpkg
 vcpkg_installed/
 
 .vs/
